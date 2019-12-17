@@ -15,7 +15,6 @@ import {
     AsyncStorage
   } from "react-native";
 import LinearGradient from 'react-native-linear-gradient';
-import ElevatedView from 'react-native-elevated-view';
 
 
 import MainText from "../components/UI/MainText";
@@ -23,18 +22,15 @@ import HeadingText from "../components/UI/HeadingText";
 import DefaultInput from '../components/UI/DefaultInput';
 import ButtonWithBackground from "../components/UI/ButtonWithBackground";
   
-export default class Auth extends Component {
+export default class SignInScreen extends Component {
     state = {
         keyAvoid: false,
         email: '',
         password: '',
-        defaultEmail: 'youssef',
-        defaultPassword: 'Azerty123'
+        confirmPassowrd: ''
     }
 
-    async componentWillMount () {
-        // await AsyncStorage.setItem('email', 'youssef');
-        // await AsyncStorage.setItem('password', 'Azerty123');
+    componentWillMount () {
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
         this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
       }
@@ -53,13 +49,26 @@ export default class Auth extends Component {
     }
 
     handleSubmit = async () => {
-        // let email = await AsyncStorage.getItem('email');
-        // let password = await AsyncStorage.getItem('password');
-        // if(this.state.email == this.state.defaultEmail && this.state.password == this.state.defaultPassword){
-            this.props.navigation.navigate('main')
-        // } else {
-        //     alert("Wrong email or password !");
-        // }
+      // let email = await AsyncStorage.getItem('email');
+      // let password = await AsyncStorage.getItem('password');
+      // if(this.state.password === this.state.confirmPassowrd && this.state.password !== '' && this.state.confirmPassowrd !== '') {
+      //   // alert("hello1")
+      //   await AsyncStorage.setItem('email', this.state.email);
+      //   await AsyncStorage.setItem('password', this.state.password);
+      //   this.props.navigation.navigate('main');
+      // } 
+      // if (email !== '' && password !== '' && this.state.password === this.state.confirmPassowrd && this.state.password !== '') {
+      //   // alert("hello2")
+      //   await AsyncStorage.setItem('email', '');
+      //   await AsyncStorage.setItem('password', '');
+      //   await AsyncStorage.setItem('email', this.state.email);
+      //   await AsyncStorage.setItem('password', this.state.password);
+      //   this.props.navigation.navigate('main');
+      // }
+      // else {
+      //   alert("Password not identical and must not be blank !")
+      // }
+      this.props.navigation.navigate('main');
     }
 
     // background-image: linear-gradient(to right top, #385898, #727db1, #a4a6ca, #d2d1e4, #ffffff);
@@ -88,7 +97,7 @@ export default class Auth extends Component {
                             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                             <View style={styles.inputContainer}>
                                 <DefaultInput
-                                    placeholder="Identifiant"
+                                    placeholder="email"
                                     style={styles.input}
                                     autoCapitalize="none"
                                     autoCorrect={false}
@@ -108,6 +117,13 @@ export default class Auth extends Component {
                                             secureTextEntry
                                             onChange={text => this.setState({ password: text })}
                                         />
+
+                                          <DefaultInput
+                                            placeholder="Confirm Password"
+                                            style={styles.input}
+                                            secureTextEntry
+                                            onChange={text => this.setState({ confirmPassowrd: text })}
+                                          />
                                     </View>
                                 </View>
                             </View>
@@ -125,8 +141,8 @@ export default class Auth extends Component {
                                     <HeadingText style={styles.textCenter}>Sign In</HeadingText>
                                 </ButtonWithBackground>
                             {/* </ElevatedView> */}
-                            <TouchableOpacity style={{ marginTop: this.state.keyAvoid ? 80 : 100, marginBottom: 30 }} onPress={() => this.props.navigation.navigate('signin')}>
-                                <HeadingText style={styles.createAccountText}>Create a new account</HeadingText>
+                            <TouchableOpacity style={{ marginTop: this.state.keyAvoid ? 80 : 100, marginBottom: 30 }} onPress={() => this.props.navigation.navigate('auth')}>
+                                <HeadingText style={styles.createAccountText}>Login</HeadingText>
                             </TouchableOpacity>
                         </KeyboardAvoidingView>
                     </ScrollView>

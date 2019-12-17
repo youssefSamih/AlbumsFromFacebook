@@ -9,6 +9,7 @@ import reducer from "./src/reducer";
 import AuthScreen from './src/screens/Auth';
 import MainScreen from './src/screens/Main';
 import AlbumsScreen from './src/screens/Albums';
+import SignInScreen from './src/screens/SignIn';
 
 export default function App() {
   const MainNavigator = createAppContainer(
@@ -16,14 +17,7 @@ export default function App() {
       auth : { screen: AuthScreen },
       main : { screen: MainScreen },
       albums : { screen: AlbumsScreen },
-      // main : { 
-      //   screen: createStackNavigator({
-      //     projecthome: { screen: ProjectHome },
-      //     Project: { screen: ProjectScreen }
-      //   },{
-      //     headerMode: "none"
-      //   })
-      // }
+      signin : { screen: SignInScreen },
     },{
       defaultNavigationOptions:{
         tabBarVisible: false,
